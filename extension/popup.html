@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PhishGuard-AI</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="extension-container">
+    <header class="header">
+      <div class="brand">
+        <svg class="shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+        <div>
+          <h1>PhishGuard-AI</h1>
+          <span class="tagline">Threat Intelligence Shield</span>
+        </div>
+      </div>
+      <div class="badge-status" id="backendStatus">Checking backend...</div>
+    </header>
+
+    <main class="content">
+      <div class="input-card">
+        <label for="urlInput">Target URL</label>
+        <div class="url-bar">
+          <input type="text" id="urlInput" placeholder="https://example.com" />
+          <button id="getCurrentTabBtn" title="Grab current browser tab">Active Tab</button>
+        </div>
+        <button id="scanBtn" class="primary-btn">Analyze Target URL</button>
+      </div>
+
+      <!-- Loading State -->
+      <div id="loadingState" class="state-panel hidden">
+        <div class="spinner"></div>
+        <p>Extracting structural features & querying threat models...</p>
+      </div>
+
+      <!-- Error State -->
+      <div id="errorState" class="state-panel error hidden">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <p id="errorMessage">Unable to connect to PhishGuard server.</p>
+        <button id="retryBtn" class="secondary-btn">Retry Connection</button>
+      </div>
+
+      <!-- Result Card -->
+      <div id="resultState" class="result-card hidden">
+        <div class="result-header" id="resultHeader">
+          <div class="score-dial">
+            <span class="score-number" id="riskScore">0</span>
+            <span class="score-max">/100</span>
+          </div>
+          <div class="result-meta">
+            <h3 id="riskClassification">Low Risk</h3>
+            <span id="targetDomain" class="domain-text">domain.com</span>
+            <span id="mlConfidence" class="confidence-text">ML Confidence: 95%</span>
+          </div>
+        </div>
+
+        <div class="analysis-box">
+          <h4>Security Analysis</h4>
+          <p id="explanationText" class="explanation"></p>
+        </div>
+
+        <div class="indicators-section">
+          <h4>Detected Indicators (<span id="indicatorCount">0</span>)</h4>
+          <ul id="indicatorList" class="indicator-list"></ul>
+        </div>
+
+        <div class="recommendation-box">
+          <h4>Recommended Safety Action</h4>
+          <p id="recommendationText"></p>
+        </div>
+
+        <div class="action-footer">
+          <button id="copyDetailsBtn" class="secondary-btn">Copy Scan Details</button>
+          <span id="copiedNotice" class="copied-notice hidden">Copied to clipboard!</span>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <small>Automated assessment · PhishGuard-AI v1.0</small>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

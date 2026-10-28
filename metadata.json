@@ -1,0 +1,6 @@
+{
+  "name": "PhishGuard-AI",
+  "description": "AI-based Phishing URL Detection, Scam Analysis, and Cyber Threat Protection System with multi-factor risk scoring, message scam analysis, threat intelligence, and browser extension.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
